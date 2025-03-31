@@ -1,0 +1,125 @@
+
+{% extends "base.html" %}
+{% block content %}
+<div class="config-container">
+    <h1>System Configuration</h1>
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-section">
+            <h2>API Keys</h2>
+            <div class="form-group">
+                <label>Weaviate Cluster URL:</label>
+                <input type="text" name="weaviate_url" required placeholder="https://your-cluster.weaviate.network">
+            </div>
+            <div class="form-group">
+                <label>Weaviate API Key:</label>
+                <input type="password" name="weaviate_api_key" required>
+            </div>
+            <div class="form-group">
+                <label>Together AI API Key:</label>
+                <input type="password" name="together_api_key" required>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Document Processing</h2>
+            <div class="form-group">
+                <label>Upload PDF:</label>
+                <input type="file" name="document" accept=".pdf" required>
+            </div>
+            <div class="form-group">
+                <label>Chunk Size:</label>
+                <input type="range" name="chunk_size" min="100" max="2000" value="1000" step="50" 
+                       oninput="this.nextElementSibling.value = this.value">
+                <output>1000</output>
+            </div>
+            <div class="form-group">
+                <label>Chunk Overlap:</label>
+                <input type="range" name="chunk_overlap" min="0" max="500" value="200" step="10"
+                       oninput="this.nextElementSibling.value = this.value">
+                <output>200</output>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Model Settings</h2>
+            <div class="form-group">
+                <label>Model Name:</label>
+                <select name="model_name" required>
+                    <option value="mistralai/Mistral-7B-Instruct-v0.1" selected>Mistral 7B</option>
+                    <option value="togethercomputer/llama-2-7b-chat">Llama 2 7B</option>
+                    <option value="togethercomputer/RedPajama-INCITE-7B-Chat">RedPajama 7B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Temperature:</label>
+                <input type="range" name="temperature" min="0" max="1" value="0.7" step="0.1"
+                       oninput="this.nextElementSibling.value = this.value">
+                <output>0.7</output>
+            </div>
+            <div class="form-group">
+                <label>Max Tokens:</label>
+                <input type="range" name="max_tokens" min="100" max="2000" value="512" step="50"
+                       oninput="this.nextElementSibling.value = this.value">
+                <output>512</output>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Initialize System</button>
+    </form>
+</div>
+
+<style>
+    .config-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .form-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #f5f5f5;
+        border-radius: 8px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    input[type="range"] {
+        width: 100%;
+    }
+    .error {
+        color: #d32f2f;
+        padding: 10px;
+        background: #ffebee;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    .btn {
+        background: #4285f4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .btn:hover {
+        background: #3367d6;
+    }
+</style>
+{% endblock %}
