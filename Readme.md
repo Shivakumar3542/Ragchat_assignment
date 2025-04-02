@@ -32,7 +32,7 @@ This is a **Retrieval-Augmented Generation (RAG) Chatbot** built using Flask, We
 
 ### Install Dependencies
 ```sh
-pip install flask pymysql sqlalchemy langchain langchain-community together langchain-weaviate weaviate-client
+pip install -r requirements.txt
 ```
 
 ### Environment Variables
@@ -83,7 +83,7 @@ CREATE TABLE messages (
 ```sh
 python app.py
 ```
-The app will run on [http://localhost:5005/](http://localhost:5005/).
+The app will run on [http://localhost:5000/](http://localhost:5000/).
 
 ---
 
